@@ -1,13 +1,51 @@
 <div class="todo-app">
-  <h1>📝 Todo List</h1>
+  <h1>Todo List</h1>
+
+  <div class="stats-panel">
+    <div class="stat-item">
+      <span class="stat-label">Всего:</span>
+      <span class="stat-value">{{ stats.all }}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Активных:</span>
+      <span class="stat-value">{{ stats.active }}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Выполненных:</span>
+      <span class="stat-value">{{ stats.done }}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Удаленных:</span>
+      <span class="stat-value">{{ stats.deleted }}</span>
+    </div>
+  </div>
 
   <div class="add-todo">
     <input [(ngModel)]="newTodoTitle" (keyup.enter)="addTodo()" placeholder="Что нужно сделать?" class="todo-input">
     <button (click)="addTodo()" class="add-btn">Добавить</button>
   </div>
 
+  <div class="filters">
+    <button [class.active]="currentFilter === 'all'" (click)="setFilter('all')">
+      Все ({{ stats.all }})
+    </button>
+    <button [class.active]="currentFilter === 'active'" (click)="setFilter('active')">
+      Активные ({{ stats.active }})
+    </button>
+    <button [class.active]="currentFilter === 'done'" (click)="setFilter('done')">
+      Выполненные ({{ stats.done }})
+    </button>
+    <button [class.active]="currentFilter === 'deleted'" (click)="setFilter('deleted')">
+      Удаленные ({{ stats.deleted }})
+    </button>
+  </div>
+
   <div class="todo-list">
-    <app-todo-item *ngFor="let todo of todos" [todo]="todo" (statusChange)="handleStatusChange($event)"
+    <app-todo-item *ngFor="let todo of filteredTodos" [todo]="todo" (statusChange)="handleStatusChange($event)"
       (delete)="handleDelete($event)" (restore)="handleRestore($event)"></app-todo-item>
+
+    <div *ngIf="filteredTodos.length === 0" class="empty-state">
+      Нет задач в этой категории
+    </div>
   </div>
 </div>
