@@ -1,0 +1,38 @@
+<div class="todo-item" [ngClass]="todo.status">
+    <div *ngIf="!isEditing; else editTemplate" class="view-mode">
+        <input type="checkbox" [checked]="todo.status === 'done'" (change)="onStatusChange('done')"
+            [disabled]="todo.status === 'deleted'">
+
+        <span class="todo-title" [ngClass]="{
+        'completed': todo.status === 'done',
+        'deleted': todo.status === 'deleted'
+      }">
+            {{ todo.title }}
+        </span>
+
+        <div class="actions">
+            <button *ngIf="todo.status !== 'deleted'" (click)="startEdit()" class="edit-btn">
+                ✏️
+            </button>
+
+            <button *ngIf="todo.status === 'deleted'" (click)="onRestore()" class="restore-btn">
+                ↩️ Восстановить
+            </button>
+
+            <button *ngIf="todo.status !== 'deleted'" (click)="onDelete()" class="delete-btn">
+                🗑️
+            </button>
+        </div>
+    </div>
+
+    <ng-template #editTemplate>
+        <div class="edit-mode">
+            <input [(ngModel)]="editedTitle" (keyup.enter)="saveEdit()" (keyup.escape)="cancelEdit()" class="edit-input"
+                autofocus>
+            <div class="edit-actions">
+                <button (click)="saveEdit()" [disabled]="!editedTitle.trim()">💾</button>
+                <button (click)="cancelEdit()">❌</button>
+            </div>
+        </div>
+    </ng-template>
+</div>
