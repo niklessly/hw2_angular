@@ -42,7 +42,7 @@
 
   <div class="todo-list">
     <app-todo-item *ngFor="let todo of filteredTodos" [todo]="todo" (statusChange)="handleStatusChange($event)"
-      (delete)="handleDelete($event)" (restore)="handleRestore($event)"></app-todo-item>
+      (delete)="handleDelete($event)" (restore)="handleRestore($event)" (edit)="handleEdit($event)"></app-todo-item>
 
     <div *ngIf="filteredTodos.length === 0" class="empty-state">
       Нет задач в этой категории

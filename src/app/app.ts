@@ -74,4 +74,11 @@ export class App {
   setFilter(filter: TodoFilter) {
     this.currentFilter = filter;
   }
+
+  handleEdit(event: { id: string, title: string }) {
+    const todo = this.todos.find(t => t.id === event.id);
+    if (todo) {
+      todo.title = event.title;
+    }
+  }
 }

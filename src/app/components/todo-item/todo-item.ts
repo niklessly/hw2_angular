@@ -15,6 +15,7 @@ export class TodoItemComponent {
   @Output() statusChange = new EventEmitter<{ id: string, status: string }>();
   @Output() delete = new EventEmitter<string>();
   @Output() restore = new EventEmitter<string>();
+  @Output() edit = new EventEmitter<{ id: string, title: string }>();
 
   isEditing = false;
   editedTitle = '';
@@ -26,6 +27,7 @@ export class TodoItemComponent {
 
   saveEdit(): void {
     if (this.editedTitle.trim()) {
+      this.edit.emit({ id: this.todo.id, title: this.editedTitle.trim() });
       this.isEditing = false;
     }
   }
