@@ -48,4 +48,9 @@
       Нет задач в этой категории
     </div>
   </div>
+  <div *ngIf="stats.deleted > 0" class="actions-footer">
+    <button (click)="clearDeleted()" class="clear-btn">
+      🗑️ Очистить удаленные
+    </button>
+  </div>
 </div>

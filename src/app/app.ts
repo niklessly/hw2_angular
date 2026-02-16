@@ -81,4 +81,7 @@ export class App {
       todo.title = event.title;
     }
   }
+  clearDeleted() {
+    this.todos = this.todos.filter(t => t.status !== 'deleted');
+  }
 }
