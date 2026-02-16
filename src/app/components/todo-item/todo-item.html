@@ -11,15 +11,22 @@
         </span>
 
         <div class="actions">
-            <button *ngIf="todo.status !== 'deleted'" (click)="startEdit()" class="edit-btn">
+            <button *ngIf="todo.status === 'active' || todo.status === 'done'" (click)="startEdit()" class="edit-btn">
                 ✏️
             </button>
 
-            <button *ngIf="todo.status === 'deleted'" (click)="onRestore()" class="restore-btn">
-                ↩️ Восстановить
+            <button *ngIf="todo.status === 'active' || todo.status === 'done'" (click)="onArchive()"
+                class="archive-btn">
+                📦
             </button>
 
-            <button *ngIf="todo.status !== 'deleted'" (click)="onDelete()" class="delete-btn">
+            <button *ngIf="todo.status === 'deleted' || todo.status === 'archived'" (click)="onRestore()"
+                class="restore-btn">
+                ↩️
+            </button>
+
+            <button *ngIf="todo.status !== 'deleted' && todo.status !== 'archived'" (click)="onDelete()"
+                class="delete-btn">
                 🗑️
             </button>
         </div>

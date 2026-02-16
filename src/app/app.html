@@ -18,11 +18,10 @@
       <span class="stat-label">Удаленных:</span>
       <span class="stat-value">{{ stats.deleted }}</span>
     </div>
-  </div>
-
-  <div class="add-todo">
-    <input [(ngModel)]="newTodoTitle" (keyup.enter)="addTodo()" placeholder="Что нужно сделать?" class="todo-input">
-    <button (click)="addTodo()" class="add-btn">Добавить</button>
+    <div class="stat-item">
+      <span class="stat-label">В архиве:</span>
+      <span class="stat-value">{{ stats.archived }}</span>
+    </div>
   </div>
 
   <div class="filters">
@@ -38,7 +37,16 @@
     <button [class.active]="currentFilter === 'deleted'" (click)="setFilter('deleted')">
       Удаленные ({{ stats.deleted }})
     </button>
+    <button [class.active]="currentFilter === 'archived'" (click)="setFilter('archived')">
+      Архив ({{ stats.archived }})
+    </button>
   </div>
+
+  <div class="add-todo">
+    <input [(ngModel)]="newTodoTitle" (keyup.enter)="addTodo()" placeholder="Что нужно сделать?" class="todo-input">
+    <button (click)="addTodo()" class="add-btn">Добавить</button>
+  </div>
+
   <div *ngIf="filterMessages.length > 0" class="messages">
     <div *ngFor="let message of filterMessages" class="message warning">
       ⚠️ {{ message }}

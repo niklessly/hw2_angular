@@ -115,3 +115,23 @@ input[type="checkbox"]:disabled {
     cursor: not-allowed;
     opacity: 0.5;
 }
+
+.todo-item.archived {
+    border-left: 4px solid #6c757d;
+}
+
+.todo-title.archived {
+    color: #0066cc;
+    font-style: italic;
+}
+
+.archive-btn {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.todo-item.archived .todo-title {
+    color: #0066cc !important;
+    font-style: italic !important;
+    text-decoration: none !important;
+}

@@ -48,4 +48,8 @@ export class TodoItemComponent {
   onRestore(): void {
     this.restore.emit(this.todo.id);
   }
+
+  onArchive(): void {
+    this.statusChange.emit({ id: this.todo.id, status: 'archived' });
+  }
 }

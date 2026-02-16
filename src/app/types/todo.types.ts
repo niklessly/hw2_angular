@@ -6,4 +6,4 @@ export interface TodoItem {
     status: TodoStatus;
 }
 
-export type TodoFilter = 'all' | 'active' | 'done' | 'deleted';
+export type TodoFilter = 'all' | 'active' | 'done' | 'deleted' | 'archived';

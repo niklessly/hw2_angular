@@ -21,8 +21,9 @@ export class App {
     const active = this.todos.filter(t => t.status === 'active').length;
     const done = this.todos.filter(t => t.status === 'done').length;
     const deleted = this.todos.filter(t => t.status === 'deleted').length;
+    const archived = this.todos.filter(t => t.status === 'archived').length;
 
-    return { all, active, done, deleted };
+    return { all, active, done, deleted, archived };
   }
 
   get filteredTodos() {
@@ -33,9 +34,30 @@ export class App {
         return this.todos.filter(t => t.status === 'done');
       case 'deleted':
         return this.todos.filter(t => t.status === 'deleted');
+      case 'archived':
+        return this.todos.filter(t => t.status === 'archived');
       default:
         return this.todos;
     }
+  }
+
+  get filterMessages() {
+    const messages = [];
+
+    if (this.stats.active >= 10) {
+      messages.push('Внимание! Вы накопили 10 активных задач!');
+    }
+    if (this.stats.done >= 10) {
+      messages.push('Внимание! Вы накопили 10 выполненных задач!');
+    }
+    if (this.stats.deleted >= 10) {
+      messages.push('Внимание! Вы накопили 10 удаленных задач!');
+    }
+    if (this.stats.archived >= 10) {
+      messages.push('Внимание! Вы накопили 10 архивных задач!');
+    }
+
+    return messages;
   }
 
   addTodo() {
@@ -83,21 +105,5 @@ export class App {
   }
   clearDeleted() {
     this.todos = this.todos.filter(t => t.status !== 'deleted');
-  }
-
-  get filterMessages() {
-    const messages = [];
-
-    if (this.stats.active >= 10) {
-      messages.push('Внимание! Вы накопили 10 активных задач!');
-    }
-    if (this.stats.done >= 10) {
-      messages.push('Внимание! Вы накопили 10 выполненных задач!');
-    }
-    if (this.stats.deleted >= 10) {
-      messages.push('Внимание! Вы накопили 10 удаленных задач!');
-    }
-
-    return messages;
   }
 }
