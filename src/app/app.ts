@@ -84,4 +84,20 @@ export class App {
   clearDeleted() {
     this.todos = this.todos.filter(t => t.status !== 'deleted');
   }
+
+  get filterMessages() {
+    const messages = [];
+
+    if (this.stats.active >= 10) {
+      messages.push('Внимание! Вы накопили 10 активных задач!');
+    }
+    if (this.stats.done >= 10) {
+      messages.push('Внимание! Вы накопили 10 выполненных задач!');
+    }
+    if (this.stats.deleted >= 10) {
+      messages.push('Внимание! Вы накопили 10 удаленных задач!');
+    }
+
+    return messages;
+  }
 }

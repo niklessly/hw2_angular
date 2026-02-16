@@ -39,6 +39,11 @@
       Удаленные ({{ stats.deleted }})
     </button>
   </div>
+  <div *ngIf="filterMessages.length > 0" class="messages">
+    <div *ngFor="let message of filterMessages" class="message warning">
+      ⚠️ {{ message }}
+    </div>
+  </div>
 
   <div class="todo-list">
     <app-todo-item *ngFor="let todo of filteredTodos" [todo]="todo" (statusChange)="handleStatusChange($event)"
